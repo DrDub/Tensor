@@ -65,7 +65,7 @@ int zephir_file_exists(zval *filename)
 		return FAILURE;
 	}
 
-	php_stat(Z_STRVAL_P(filename), (php_stat_len) Z_STRLEN_P(filename), FS_EXISTS, &return_value);
+	php_stat(Z_STRVAL_P(filename), FS_EXISTS, &return_value);
 
 	if (Z_TYPE(return_value) != IS_TRUE) {
 		return FAILURE;
@@ -288,7 +288,7 @@ void zephir_file_put_contents(zval *return_value, zval *filename, zval *data)
 void zephir_filemtime(zval *return_value, zval *path)
 {
 	if (EXPECTED(Z_TYPE_P(path) == IS_STRING)) {
-		php_stat(Z_STRVAL_P(path), (php_stat_len)(Z_STRLEN_P(path)), FS_MTIME, return_value);
+		php_stat(Z_STRVAL_P(path), FS_MTIME, return_value);
 	} else {
 		ZVAL_FALSE(return_value);
 	}
